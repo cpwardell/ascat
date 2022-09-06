@@ -53,7 +53,7 @@ ascat.getAlleleCounts = function(seq.file, output.file, loci.file, min.base.qual
 ascat.getBAFsAndLogRs = function(samplename, tumourAlleleCountsFile.prefix, normalAlleleCountsFile.prefix, tumourLogR_file, tumourBAF_file, normalLogR_file, normalBAF_file, alleles.prefix, gender, genomeVersion, chrom_names=c(1:22,'X'), minCounts=20, BED_file=NA, probloci_file=NA, seed=as.integer(Sys.time())) {
   set.seed(seed)
   stopifnot(gender %in% c('XX','XY'))
-  stopifnot(genomeVersion %in% c('hg19','hg38'))
+  stopifnot(genomeVersion %in% c('hg19','hg38','t2tv2'))
   # Load data, only keep SNPs with enough coverage
   tumour_input_data = readAlleleCountFiles(tumourAlleleCountsFile.prefix, ".txt", chrom_names, 1)
   normal_input_data = readAlleleCountFiles(normalAlleleCountsFile.prefix, ".txt", chrom_names, minCounts)
@@ -143,6 +143,8 @@ ascat.getBAFsAndLogRs = function(samplename, tumourAlleleCountsFile.prefix, norm
       nonPAR=c(2699521,154931043)
     } else if (genomeVersion=='hg38') {
       nonPAR=c(2781480,155701382)
+    } else if (genomeVersion=='t2tv2') {
+      nonPAR=c(2394411,153926588)
     }
     nonPAR=which(allele_data$chromosome %in% c('X','chrX') & allele_data$position>=nonPAR[1] & allele_data$position<=nonPAR[2])
     tumourLogR[nonPAR]=tumourLogR[nonPAR]-1
@@ -205,7 +207,7 @@ ascat.synchroniseFiles=function(samplename,tumourLogR_file,tumourBAF_file,normal
 #' @param alleles.prefix Prefix path to the allele data (e.g. "G1000_alleles_chr").
 #' @param loci.prefix Prefix path to the loci data (e.g. "G1000_loci_chr").
 #' @param gender Gender information, either 'XX' (=female) or 'XY' (=male).
-#' @param genomeVersion Genome version, either 'hg19' or 'hg38'.
+#' @param genomeVersion Genome version, either 'hg19' or 'hg38' or 't2tv2'.
 #' @param nthreads The number of parallel processes for getting allele counts (optional, default=1).
 #' @param tumourLogR_file Path to the tumour logR output (optional, paste0(tumourname,"_tumourLogR.txt")).
 #' @param tumourBAF_file Path to the tumour BAF output (optional, paste0(tumourname,"_tumourBAF.txt")).
