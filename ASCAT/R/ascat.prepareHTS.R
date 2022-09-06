@@ -42,7 +42,7 @@ ascat.getAlleleCounts = function(seq.file, output.file, loci.file, min.base.qual
 #' @param normalBAF_file File where BAF from the normal will be written.
 #' @param alleles.prefix Prefix path to the allele data (e.g. "G1000_alleles_chr")
 #' @param gender Gender information, either 'XX' (=female) or 'XY' (=male).
-#' @param genomeVersion Genome version, either 'hg19' or 'hg38'.
+#' @param genomeVersion Genome version, either 'hg19' or 'hg38' or 't2tv2'.
 #' @param chrom_names A vector with allowed chromosome names (optional, default=c(1:22,'X')). Do not set it to paste0('chr',c(1:22,'X')) if data is 'chr'-based.
 #' @param minCounts Minimum depth, in normal samples, required for a SNP to be considered (optional, default=20).
 #' @param BED_file A BED file for only looking at SNPs within specific intervals (optional, default=NA).
